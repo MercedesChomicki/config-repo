@@ -1,23 +1,8 @@
-global:
-  message: Welcome to pet service prod environment!!
-message: Hello from Prod!
-
 spring:
-  datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-  user-service:
-    url: ${USER_SERVICE_URL}
-
-server:
-  port: 8082
 
 resilience4j:
   circuitbreaker:
@@ -29,12 +14,3 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 5 # Llamadas permitidas en estado "medio abierto"
         slidingWindowSize: 100                 # Cantidad de llamadas consideradas para calcular el ratio
         slidingWindowType: COUNT_BASED         
-
-  retry:
-    instances:
-      userService:
-        maxAttempts: 3                         # Máximo de intentos
-        waitDuration: 1s                       # Espera entre intentos
-        retryExceptions:
-          - org.springframework.web.client.HttpServerErrorException
-          - java.io.IOException
