@@ -1,0 +1,34 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  user-service:
+    url: ${USER_SERVICE_URL}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService:
+        minimumNumberOfCalls: 100
+        failureRateThreshold: 100
+        waitDurationInOpenState: 1ms
+  retry:
+    instances:
+      userService:
+        maxAttempts: 3                         # Máximo de intentos
+        waitDuration: 1s                       # Espera entre intentos
+        retryExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.io.IOException
+
+management:
+  health:
+    circuit-breakers:
+      enabled: true
