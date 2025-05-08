@@ -3,6 +3,9 @@ global:
 logging:
   level:
     root: INFO
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
 eureka:
   client:
     service-url:
