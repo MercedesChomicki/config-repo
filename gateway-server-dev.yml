@@ -1,0 +1,21 @@
+server:
+  port: 8089
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: pet-service-route
+            uri: lb://pet-service
+            predicates:
+              - Path=/pets/**
+          - id: user-service-route
+            uri: lb://user-service
+            predicates:
+              - Path=/users/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
