@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: ${CHAT_DATASOURCE_URL}
