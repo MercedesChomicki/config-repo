@@ -1,29 +1,41 @@
 server:
   port: 8089
+  
 spring:
   cloud:
     gateway:
-      mvc:
-        routes:
-          - id: pet-service-route
-            uri: lb://pet-service
-            predicates:
-              - Path=/pets/**
-          - id: user-service-route
-            uri: lb://user-service
-            predicates:
-              - Path=/users/**
-          - id: chat_ws
-            uri: lb://chat-service
-            predicates:
-              - Path=/ws/**
-            filters:
-              - name: RewritePath
-                args:
-                  regexp: /ws/(?<segment>.*)
-                  replacement: /ws/${segment}
+      routes:
+        - id: pet-service-route
+          uri: lb://pet-service
+          predicates:
+            - Path=/pets/**
+        - id: user-service-route
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+        - id: chat_ws
+          uri: lb://chat-service
+          predicates:
+            - Path=/ws/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: /ws/(?<segment>.*)
+                replacement: /ws/${segment}
       websocket:
         enabled: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
 eureka:
   client:
     register-with-eureka: true
