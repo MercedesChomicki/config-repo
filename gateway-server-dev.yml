@@ -17,6 +17,13 @@ spring:
             uri: lb://chat-service
             predicates:
               - Path=/ws/**
+            filters:
+              - name: RewritePath
+                args:
+                  regexp: /ws/(?<segment>.*)
+                  replacement: /ws/${segment}
+      websocket:
+        enabled: true
 eureka:
   client:
     register-with-eureka: true
