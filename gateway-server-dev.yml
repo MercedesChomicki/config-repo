@@ -9,14 +9,20 @@ spring:
           uri: lb://pet-service
           predicates:
             - Path=/api/pets/**
+          filters:
+            - StripPrefix=1
         - id: user-service-route
           uri: lb://user-service
           predicates:
             - Path=/api/users/**
+          filters:
+            - StripPrefix=1
         - id: chat_ws
           uri: lb://chat-service
           predicates:
             - Path=/api/ws/**
+          filters:
+            - StripPrefix=1
       websocket:
         enabled: true
       globalcors:
