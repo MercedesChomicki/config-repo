@@ -22,7 +22,7 @@ spring:
           predicates:
             - Path=/api/ws/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
       websocket:
         enabled: true
       globalcors:
