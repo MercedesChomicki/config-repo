@@ -20,7 +20,7 @@ spring:
         - id: chat_ws
           uri: lb://chat-service
           predicates:
-            - Path=/api/ws
+            - Path=/api/ws/**
           filters:
             - StripPrefix=1
       websocket:
