@@ -5,3 +5,10 @@ spring:
   data:
     mongodb:
       uri: ${CHAT_DATASOURCE_URL}
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
