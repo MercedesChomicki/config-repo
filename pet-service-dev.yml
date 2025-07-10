@@ -4,6 +4,13 @@ spring:
       ddl-auto: update
     show-sql: true
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+
 resilience4j:
   circuitbreaker:
     instances:
