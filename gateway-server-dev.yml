@@ -2,8 +2,6 @@ server:
   port: 8080
   
 spring:
-  webflux:
-    base-path: /
   cloud:
     gateway:
       globalcors:
@@ -18,7 +16,10 @@ spring:
               - PUT
               - DELETE
               - OPTIONS
-            allowedHeaders: "*"
+            allowedHeaders: 
+              - "*"
+            exposedHeaders:
+              - "Authorization"
             allowCredentials: true
       routes:
         - id: pet-service-route
