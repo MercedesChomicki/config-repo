@@ -2,8 +2,24 @@ server:
   port: 8080
   
 spring:
+  webflux:
+    base-path: /
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
       routes:
         - id: pet-service-route
           uri: lb://pet-service
@@ -25,20 +41,6 @@ spring:
             - StripPrefix=1
       websocket:
         enabled: true
-        
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://localhost:5173"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-            allowedHeaders: "*"
-            allowCredentials: true
      
 eureka:
   client:
