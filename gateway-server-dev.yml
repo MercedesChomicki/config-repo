@@ -28,15 +28,15 @@ spring:
           filters:
             - StripPrefix=1
             
-        - id: chat-service
+        - id: chat-service-rest
           uri: lb://chat-service
           predicates:
             - Path=/api/chat/**
           filters:
             - StripPrefix=1
             
-        - id: chat_ws
-          uri: lb://chat-service
+        - id: chat-service-ws
+          uri: lb:ws://chat-service
           predicates:
             - Path=/api/ws/**
           filters:
