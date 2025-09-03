@@ -1,6 +1,3 @@
-server:
-  port: 8080
-  
 spring:
   cloud:
     gateway:
@@ -24,7 +21,7 @@ spring:
           predicates:
             - Path=/api/users/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=2
             
         - id: pet-service
           uri: lb://pet-service
