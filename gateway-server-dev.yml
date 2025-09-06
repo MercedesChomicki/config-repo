@@ -16,10 +16,16 @@ spring:
             allowCredentials: true
             exposedHeaders: "*"
       routes:
-        - id: user-service
+        - id: user-service-users
           uri: lb://user-service
           predicates:
             - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+
+        - id: user-service-auth
+          uri: lb://user-service
+          predicates:
             - Path=/api/auth/**
           filters:
             - StripPrefix=1
