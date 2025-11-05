@@ -45,7 +45,7 @@ spring:
             - StripPrefix=1
             
         - id: chat-service-ws
-          uri: lb:ws://chat-service
+          uri: lb://chat-service
           predicates:
             - Path=/api/ws/**
           filters:
